@@ -92,6 +92,9 @@ export const content = {
           "Designed the organization's first three-stage biannual performance review framework, with standardised KPI templates and C-level review cadences.",
           "Solely managed QA for a contractor-built platform; identified <em>33 security vulnerabilities</em> pre-launch and designed mitigations that averted regulatory and reputational risk.",
           "Rescued a 5PM VC project by diagnosing the real bottleneck (missing creative assets, not a technical failure), rebuilt critical frontend components, and delivered by midnight.",
+          "Authored end-to-end product specs delivered directly to engineering, using Claude and Google AI Studio to compress drafting time from days to hours; validated through peer review before handoff.",
+          "Prototyped AI-assisted product demos for C-level pitch scenarios using Claude Code and Google AI Studio, enabling stakeholder decisions without upfront engineering commitment.",
+          "Accelerated performance review framework design with LLM tooling, generating structured KPI templates and peer-review forms at speed while maintaining cross-functional alignment.",
         ],
       },
       {
@@ -229,6 +232,9 @@ export const content = {
           "設計公司首套三階段半年績效考核制度，建立 KPI 模板與高階主管 review 流程。",
           "獨立負責外包平台 QA，在上線前找出 <em>33 個安全漏洞</em>，並設計修補方案，降低法規與品牌風險。",
           "在專案即將延遲交付時，重新定位問題根源並協調跨部門執行方向，於數小時內完成關鍵前端交付。",
+          "使用 Claude 與 Google AI Studio 撰寫端對端產品規格並直接交付工程團隊，將起草時間從數天壓縮至數小時；交付前經同儕審查驗證。",
+          "運用 Claude Code 與 Google AI Studio 為高層簡報場景打造 AI 輔助產品原型，使利害關係人得以在無需工程前期投入的情況下做出決策。",
+          "藉助大型語言模型工具加速績效考核框架設計，快速生成結構化 KPI 範本與同儕評估表單，同時維持跨職能的一致性。",
         ],
       },
 
