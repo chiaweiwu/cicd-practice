@@ -20,18 +20,18 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Install pnpm globally
+        run: npm install -g pnpm
 
-      - name: Setup pnpm
-        run: corepack prepare pnpm@latest --activate
+      - name: Verify pnpm
+        run: pnpm --version
 
       - name: Install dependencies
         run: pnpm install
