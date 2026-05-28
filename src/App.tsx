@@ -1,206 +1,100 @@
+import { useState } from "react";
 import "./App.css";
+import { content } from "./content";
 
-// ─── content ─────────────────────────────────────────────────────────────────
-const identity = {
-  first: "Lily",
-  last: "Wu",
-  middle: "Chia-Wei",
-  primaryRole: "AI Frontend engineer",
-  secondaryRole: "Systems builder",
-  location: "Taipei, Taiwan",
-  contact: [
-    {
-      label: "Email",
-      text: "im.cwwu@gmail.com",
-      href: "mailto:im.cwwu@gmail.com",
-    },
-    {
-      label: "LinkedIn",
-      text: "/in/lily-w-3b842796",
-      href: "https://www.linkedin.com/in/lily-w-3b842796",
-    },
-    { label: "City", text: "taipei, taiwan · gmt +8", href: null },
-  ],
-};
+type Lang = "en" | "zh";
 
-const education = [
-  {
-    school: "ACADEMY OF ART UNIVERSITY",
-    degree: "M.A. Web Design & New Media",
-    detail: "3.3 GPA · double course load",
-    dates: "Jan 2015 — May 2017",
-  },
-  {
-    school: "UNIVERSITY OF MICHIGAN",
-    degree: "B.A. Arts & Ideas in the Humanities",
-    detail: "Ann Arbor, MI",
-    dates: "Sep 2010 — May 2014",
-  },
-];
-
-const skills = [
-  {
-    label: "TECHNICAL",
-    lines: [
-      "React, TypeScript, Redux",
-      "Node.js, Ruby on Rails",
-      "Docker, NativeScript, Git",
-    ],
-  },
-  {
-    label: "DESIGN",
-    lines: [
-      "Figma, Adobe Creative Suite",
-      "Interface & interaction design",
-      "Wireframing, prototyping",
-      "UI/UX research, QA",
-    ],
-  },
-  {
-    label: "LANGUAGES",
-    lines: ["Mandarin (native)", "English (native)", "French (conversational)"],
-  },
-  {
-    label: "CERTIFICATIONS",
-    lines: [
-      "HACCP Coordinator",
-      "ISO 13485:2016 QMS Auditor",
-      "SQF Practitioner (×8)",
-    ],
-  },
-];
-
-const experience = [
-  {
-    company: "ITRD",
-    dates: "05/24 — Present",
-    place: "Taipei",
-    role: "Director of project management & frontend reviewer",
-    prev: "prev. Frontend Engineer & PM",
-    body: [
-      "Promoted from engineer to director within nine months — recruited directly by the CTO and CIO to lead cross-functional teams under ambiguity.",
-      "Designed the organization's first three-stage biannual performance review framework, with standardised KPI templates and C-level review cadences.",
-      "Solely managed QA for a contractor-built platform; identified <em>33 security vulnerabilities</em> pre-launch and designed mitigations that averted regulatory and reputational risk.",
-      "Rescued a 5PM VC demo by diagnosing the real bottleneck (missing creative assets, not a technical failure), rebuilt critical frontend components, and delivered by midnight.",
-    ],
-  },
-  {
-    company: "GAMANIA",
-    dates: "10/22 — 10/23",
-    place: "Taipei · Contractor",
-    role: "Frontend developer",
-    prev: null,
-    body: [
-      "Built a secure internal resource distribution platform for C-level executives and 19 subsidiary leaders; delivered full implementation with three demo and QA cycles in <em>22 days</em>.",
-      "Redesigned the cross-company document signing system — reduced code volume by 90%, added secure mobile signing for iOS and Android, served 900+ daily users.",
-      "Refactored the certificate portal, reducing load time from 12s to 3s and eliminating a recurring bottleneck for cross-departmental workflows.",
-    ],
-  },
-  {
-    company: "BANCLOGIX",
-    dates: "03/21 — 07/22",
-    place: "KVB Kunlun Group · Taipei",
-    role: "Web engineer",
-    prev: null,
-    body: [
-      "Developed and maintained cross-border fintech dashboards supporting multinational operations across Taiwan, Canada, Hong Kong and Singapore; designed role-based access controls ensuring regional data-security compliance.",
-      "Investigated and recovered transaction data following a currency-conversion error; identified root-cause inconsistencies and reported findings that prevented recurrence.",
-    ],
-  },
-  {
-    company: "LOGIC SOLUTIONS",
-    dates: "07/19 — 02/21",
-    place: "Taipei",
-    role: "Frontend developer & UI/UX designer",
-    prev: null,
-    body: [
-      "Led a three-engineer QA sub-team and developed products for global enterprise clients including EVA Air, Salon Iris (15K salons), and Camp Bow Wow (170+ U.S. sites).",
-      "Served as bilingual scrum master bridging U.S. and Taiwan engineering teams.",
-      "Independently designed full UI/UX flows for Camp Bow Wow's mobile app from incomplete client materials — delivering functional screens and user-flow logic <em>in eight hours</em>.",
-    ],
-  },
-];
-
-const honors = [
-  "Winner — NTUST 9th Int'l Innovative Entrepreneurial Competition · 2018",
-  "Community Organizer — Taiwanese in Data Science · 2020",
-  "Selected — Academy of Art Spring Show Exhibition · 2017",
-];
-
-// ─── header ornament ─────────────────────────────────────────────────────────
-function HeaderMark() {
+// ─── header ornament + language toggle ───────────────────────────────────────
+function HeaderMark({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
   return (
-    <svg viewBox="0 0 100 32" fill="none" stroke="currentColor" strokeWidth="1">
-      <ellipse cx="20" cy="16" rx="14" ry="9" />
-      <ellipse cx="50" cy="16" rx="14" ry="9" />
-      <ellipse cx="80" cy="16" rx="14" ry="9" />
-      <circle cx="20" cy="16" r="1.4" fill="currentColor" />
-      <circle cx="50" cy="16" r="1.4" fill="currentColor" />
-      <circle cx="80" cy="16" r="1.4" fill="currentColor" />
-    </svg>
+    <button
+      className="header-mark"
+      onClick={onToggle}
+      aria-label="Toggle language"
+    >
+      <svg
+        viewBox="0 0 100 32"
+        fill="none"
+        stroke="transparent"
+        strokeWidth="1"
+      >
+        <ellipse cx="20" cy="16" rx="14" ry="9" />
+        <ellipse cx="50" cy="16" rx="14" ry="9" />
+        <ellipse cx="80" cy="16" rx="14" ry="9" />
+        <circle cx="20" cy="16" r="1.4" fill="transparent" />
+        <circle cx="50" cy="16" r="1.4" fill="transparent" />
+        <circle cx="80" cy="16" r="1.4" fill="transparent" />
+      </svg>
+      <span className="lang-label">{lang === "en" ? "中文" : "EN"}</span>
+    </button>
   );
 }
 
 // ─── app ─────────────────────────────────────────────────────────────────────
 export default function App() {
+  const [lang, setLang] = useState<Lang>("en");
+  const c = content[lang];
+
   return (
-    <article className="sheet">
+    <article className="sheet" key={lang}>
       {/* header */}
       <header className="header">
-        <div>
+        <div className="anim">
           <h1 className="name">
-            {identity.first}
-            <span className="last">{identity.last}</span>
+            {c.identity.first}
+            <span className="last">{c.identity.last}</span>
           </h1>
           <div className="name-meta">
-            <span className="accent">{identity.middle}</span> ·{" "}
-            {identity.location}
+            <span className="accent">{c.identity.middle}</span> ·{" "}
+            {c.identity.location}
           </div>
         </div>
 
-        <div className="tag-and-contact">
+        <div className="tag-and-contact anim">
           <p className="tagline">
-            {identity.primaryRole}
-            <span className="plus">+</span>
-            <span className="alt">{identity.secondaryRole}</span>
+            {c.identity.primaryRole}
+            <span className="plus">&amp;</span>
+            <span className="alt">{c.identity.secondaryRole}</span>
           </p>
+          <p className="description">{c.identity.description}</p>
           <div className="contact-list">
-            {identity.contact.map((c, i) =>
-              c.href ? (
+            {c.identity.contact.map((ct, i) =>
+              ct.href ? (
                 <a
                   key={i}
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  href={ct.href}
+                  target={ct.href.startsWith("http") ? "_blank" : undefined}
                   rel={
-                    c.href.startsWith("http")
+                    ct.href.startsWith("http")
                       ? "noopener noreferrer"
                       : undefined
                   }
                 >
-                  {c.text}
+                  {ct.text}
                 </a>
               ) : (
                 <span key={i} style={{ display: "block" }}>
-                  {c.text}
+                  {ct.text}
                 </span>
               ),
             )}
           </div>
         </div>
 
-        <div className="header-mark">
-          <HeaderMark />
-        </div>
+        <HeaderMark
+          lang={lang}
+          onToggle={() => setLang((l) => (l === "en" ? "zh" : "en"))}
+        />
       </header>
 
       {/* body */}
       <div className="body">
         {/* left column */}
-        <aside className="left">
+        <aside className="left anim">
           <section>
-            <h2 className="sec-h">Education</h2>
+            <h2 className="sec-h">{c.nav.education}</h2>
             <div className="block">
-              {education.map((e, i) => (
+              {c.education.map((e, i) => (
                 <div className="entry" key={i}>
                   <span
                     className="label"
@@ -217,9 +111,9 @@ export default function App() {
           </section>
 
           <section>
-            <h2 className="sec-h">Skills</h2>
+            <h2 className="sec-h">{c.nav.skills}</h2>
             <div className="block">
-              {skills.map((g, i) => (
+              {c.skills.map((g, i) => (
                 <div key={i}>
                   <span
                     className="label"
@@ -238,9 +132,9 @@ export default function App() {
           </section>
 
           <section>
-            <h2 className="sec-h">Honors</h2>
+            <h2 className="sec-h">{c.nav.honors}</h2>
             <div className="block">
-              {honors.map((h, i) => (
+              {c.honors.map((h, i) => (
                 <span
                   className="skill-line"
                   key={i}
@@ -254,10 +148,10 @@ export default function App() {
         </aside>
 
         {/* right column */}
-        <section className="right">
-          <h2 className="sec-h">Experience</h2>
+        <section className="right anim">
+          <h2 className="sec-h">{c.nav.experience}</h2>
           <div className="exp-list">
-            {experience.map((x, i) => (
+            {c.experience.map((x, i) => (
               <div className="exp-row" key={i}>
                 <div className="exp-tag">
                   <span className="company">{x.company}</span>
@@ -282,12 +176,9 @@ export default function App() {
       </div>
 
       {/* footer */}
-      <div className="foot">
-        <span>— Lily Wu · {identity.location}</span>
-        <span>
-          Set in EB Garamond, Cormorant Garamond, Inter, IBM Plex Mono
-        </span>
-        <span>© MMXXVI</span>
+      <div className="foot anim">
+        <span>{c.footer.sig}</span>
+        <span>{c.footer.year}</span>
       </div>
     </article>
   );
